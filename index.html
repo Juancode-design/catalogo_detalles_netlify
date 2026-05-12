@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartStore Pro - Navegación Fluida</title>
+    <link rel="stylesheet" href="tienda.css">
+    <style>
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo"><h2>SmartStore</h2></div>
+        <input type="text" id="search-input" class="search-input" placeholder="Buscar productos..." oninput="handleSearch()">
+        <div class="nav-controls">
+            <select id="currency-select" class="mobile-currency" onchange="changeCurrency(this.value)" style="padding:8px; border-radius:8px;">
+                <option value="USD">USD</option>
+                <option value="VES">VES</option>
+                <option value="EUR">EUR</option>
+                <option value="PEN">PEN</option>
+            </select>
+            <button onclick="toggleCart()" style="background:var(--primary); color:white; border:none; padding:10px 15px; border-radius:8px; cursor:pointer; font-weight:bold;">
+                🛒 <span id="cart-count">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="cart-overlay" id="overlay" onclick="toggleCart()"></div>
+    <div class="categories-scroll" id="categories-container"></div>
+
+    <aside class="side-cart" id="side-cart">
+        <div style="padding: 20px; background: var(--dark); color: white; display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin:0">Tu Pedido</h3>
+            <button onclick="toggleCart()" style="background:none; border:none; color:white; font-size:1.8rem; cursor:pointer;">&times;</button>
+        </div>
+        <div id="cart-list" style="flex-grow:1; overflow-y:auto;"></div>
+        <div style="padding:20px; border-top:1px solid #eee;">
+            <div style="display:flex; justify-content:space-between; font-weight:bold; margin-bottom:15px; font-size:1.2rem;">
+                <span>Total:</span> <span id="total-price">$0.00</span>
+            </div>
+		<a href="https://wa.me/584129471359" target="_blank" title="Whatsapp">
+			<button style="width:100%; background:var(--primary); color:white; border:none; padding:15px; border-radius:10px; font-weight:bold; cursor:pointer;">ENVIAR PEDIDO POR WHATSAPP 📱</button>
+        </a>
+		</div>
+    </aside>
+
+    <main class="container">
+        <div id="product-container"></div>
+        <div class="load-more-container">
+            <button id="btn-load-more" class="btn-load" onclick="loadMore()">Ver más productos</button>
+        </div>
+    </main>
+
+    <script>
+    </script>
+	
+	<footer>
+    <div class="footer-container">
+        <!-- Sobre la Tienda -->
+        <div class="footer-section">
+            <h3>SmartStore</h3>
+            <p>Tu destino número uno para la tecnología más avanzada. Ofrecemos calidad garantizada y envíos a todo el país.</p>
+            <div class="social-links">
+                <div class="social-icon">T</div>
+                <div class="social-icon">I</div>
+                <div class="social-icon">F</div>
+            </div>
+        </div>
+
+        <!-- Enlaces Rápidos -->
+        <div class="footer-section">
+            <h3>Explorar</h3>
+            <ul>
+                <li onclick="filterByCategory('all')">Todos los Productos</li>
+                <li onclick="filterByCategory('relojes')">Relojes</li>
+                <li onclick="filterByCategory('audio')">Audio</li>
+                <li onclick="filterByCategory('camaras')">Camaras</li>
+                <li onclick="filterByCategory('computacion')">Computacion</li>
+                <li>Ofertas Especiales</li>
+            </ul>
+        </div>
+
+        <!-- Soporte -->
+        <div class="footer-section">
+            <h3>Soporte</h3>
+            <ul>
+                <li>Preguntas Frecuentes</li>
+                <li>Métodos de Envío</li>
+                <li>Términos y Condiciones</li>
+                <li>Política de Privacidad</li>
+            </ul>
+        </div>
+
+        <!-- Contacto -->
+        <div class="footer-section">
+            <h3>Contacto</h3>
+            <p>📍 Av. Principal Core 8, frente al Colegio Fe y Alegria</p>
+            <p>📞 +58 412 947 1359</p>
+            <p>📧 inversionesoceanojc@gmail.com</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 SmartStore Pro. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+<script src="tienda.js"></script>
+
+</body>
+</html>
