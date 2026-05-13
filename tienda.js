@@ -1,6 +1,6 @@
         // --- CONFIGURACIÓN DE TASAS MANUALES (BACKUP) ---
         const manualExchangeRates = {
-        'VES': 500.00, // Ejemplo: 45.50 Bolívares por Dólar
+        'VES': 505.00, // Ejemplo: 45.50 Bolívares por Dólar
         'EUR': 0.92,  // Ejemplo: 0.92 Euros por Dólar
         'PEN': 3.75   // Ejemplo: 3.75 Soles por Dólar
         };
