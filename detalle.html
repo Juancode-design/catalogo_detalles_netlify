@@ -8,6 +8,7 @@
         :root {
             --primary: #2ecc71; --secondary: #3498db; --dark: #2c3e50; 
             --light: #f4f4f9; --white: #ffffff;
+            --whatsapp: #25D366; /* Color oficial de WhatsApp */
         }
 
         body { 
@@ -156,47 +157,88 @@
 
         .btn-add:hover { background: #ffd814; transform: translateY(-2px); }
 
+        /* --- BOTONES DE COMPARTIR --- */
+        .share-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .btn-share {
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-whatsapp {
+            background: var(--whatsapp);
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: #20ba56;
+            transform: translateY(-2px);
+        }
+
+        .btn-copy {
+            background: #e1e8ed;
+            color: var(--dark);
+        }
+
+        .btn-copy:hover {
+            background: #d1d8dd;
+            transform: translateY(-2px);
+        }
+
         @media (max-width: 850px) {
             .detail-container { grid-template-columns: 1fr; margin: 10px; }
             .slider-container { height: 350px; }
         }
-		
-		/* media query para moviles */
-
-		@media (max-width: 600px) {
+        
+        /* media query para moviles */
+        @media (max-width: 600px) {
             .detail-container { 
                 margin: 0;
-				padding: 5px;
+                padding: 5px;
                 gap: 20px;
             }
         }
 
-		
-		/* --- ANIMACIÓN DE NOTIFICACIÓN --- */
-.toast-notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--primary);
-    color: white;
-    padding: 15px 25px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    z-index: 2000;
-    transform: translateX(120%); /* Empieza fuera de la pantalla */
-    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
+        /* --- ANIMACIÓN DE NOTIFICACIÓN --- */
+        .toast-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 2000;
+            transform: translateX(120%); /* Empieza fuera de la pantalla */
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
 
-.toast-notification.show {
-    transform: translateX(0); /* Entra a la pantalla */
-}
+        .toast-notification.show {
+            transform: translateX(0); /* Entra a la pantalla */
+        }
 
-.toast-icon {
-    font-size: 1.5rem;
-}
+        .toast-icon {
+            font-size: 1.5rem;
+        }
     </style>
 </head>
 <body>
@@ -212,155 +254,155 @@
     <script>
         const allProducts = [
             { id: 1, category: 'relojes', 
-			name: "Chupones para Vidrio", 
-			priceUSD: 0.50, 
-			description: 
+            name: "Chupones para Vidrio", 
+            priceUSD: 0.50, 
+            description: 
             "Ventosas pequeñas transparentes de 1.2 pulgadas para vidrio, sin ganchos sin agujeros, almohadillas profesionales gruesas para decoración de organización, ventana, baño, cocina, autos parabrisas, etc.",
-			images: [
-				           "./img/chupon-1.jpg",
-				           "./img/chupon-2.png",
-				           "./img/chupon-3.png"
-			] },
-			
-            { id: 2, category: 'audio', 
-			name: "Producto 2", 
-			priceUSD: 249.50, 
-			description: "Audio de alta fidelidad con cancelación activa de ruido líder en la industria. Sumérgete en tu música favorita sin distracciones externas. Cuentan con almohadillas de proteína de memoria para una comodidad extrema durante largas sesiones de uso y una batería que dura hasta 40 horas con una sola carga.", 
-			images: [
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
-			] },
-			
-            { id: 3, category: 'camaras', 
-			name: "Producto 3", 
-			priceUSD: 899.00, 
-			description: "Perfecta para fotografía nocturna y video 4K. Sensor full frame de 24.2 MP que captura detalles impresionantes. Sistema de autoenfoque ultra rápido que detecta ojos humanos y de animales. Incluye un lente de kit 24-70mm versátil para cualquier situación.", 
-			images: [
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
-			] },
-			
-            { id: 4, category: 'computacion', 
-			name: "Producto 4", 
-			priceUSD: 1250.00, 
-			description: "Pantalla OLED de 15.6 pulgadas con colores vibrantes y negros profundos. Potenciada por el último procesador de alto rendimiento y 32GB de RAM para tareas pesadas como edición de video, renderizado 3D y desarrollo de software complejo.", 
-			images: [
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
-			] },
-			
-            { id: 5, category: 'relojes', 
-			name: "Producto 5", 
-			priceUSD: 199.99, 
-			description: "Oxígeno en sangre y 15 días de batería. Este reloj inteligente de última generación ofrece un seguimiento preciso de tu salud y actividades deportivas. Con su pantalla AMOLED de alta resolución, podrás ver tus notificaciones incluso bajo luz solar directa. Incluye más de 100 modos deportivos y es resistente al agua hasta 50 metros.", 
-			images: [
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
-			] },
-			
-            { id: 6, category: 'audio', 
-			name: "Producto 6", 
-			priceUSD: 249.50, 
-			description: "Audio de alta fidelidad con cancelación activa de ruido líder en la industria. Sumérgete en tu música favorita sin distracciones externas. Cuentan con almohadillas de proteína de memoria para una comodidad extrema durante largas sesiones de uso y una batería que dura hasta 40 horas con una sola carga.", 
-			images: [
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
-			] },
-			
-            { id: 7, category: 'camaras', 
-			name: "Producto 7", 
-			priceUSD: 899.00, 
-			description: "Perfecta para fotografía nocturna y video 4K. Sensor full frame de 24.2 MP que captura detalles impresionantes. Sistema de autoenfoque ultra rápido que detecta ojos humanos y de animales. Incluye un lente de kit 24-70mm versátil para cualquier situación.", 
-			images: [
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
-			] },
-			
-            { id: 8, category: 'computacion', 
-			name: "Producto 8", 
-			priceUSD: 1250.00, 
-			description: "Pantalla OLED de 15.6 pulgadas con colores vibrantes y negros profundos. Potenciada por el último procesador de alto rendimiento y 32GB de RAM para tareas pesadas como edición de video, renderizado 3D y desarrollo de software complejo.", 
-			images: [
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
-			] },
-			
-            { id: 9, category: 'camaras', 
-			name: "Producto 9", 
-			priceUSD: 899.00, 
-			description: "Perfecta para fotografía nocturna y video 4K. Sensor full frame de 24.2 MP que captura detalles impresionantes. Sistema de autoenfoque ultra rápido que detecta ojos humanos y de animales. Incluye un lente de kit 24-70mm versátil para cualquier situación.", 
-			images: [
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
-			] },
-			
-            { id: 10, category: 'computacion', 
-			name: "Producto 10", 
-			priceUSD: 1250.00, 
-			description: "Pantalla OLED de 15.6 pulgadas con colores vibrantes y negros profundos. Potenciada por el último procesador de alto rendimiento y 32GB de RAM para tareas pesadas como edición de video, renderizado 3D y desarrollo de software complejo.", 
-			images: [
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
-				           "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
-			] }
-		
-		];
-
-// --- CONFIGURACIÓN DE TASAS MANUALES (Mantenlas iguales a tu index.js) ---
-const manualExchangeRates = {
-    'VES': 500.00, 
-    'EUR': 0.92,  
-    'PEN': 3.75   
-};
-
-// --- LÓGICA DE MONEDA Y ESTADO ---
-const params = new URLSearchParams(window.location.search);
-const productId = parseInt(params.get('id'));
-const p = allProducts.find(item => item.id === productId);
-
-let currentCurrency = localStorage.getItem('currency') || 'USD';
-let exchangeRate = 1;
-let currentSlide = 0;
-
-// --- FUNCIONES DE MONEDA ACTUALIZADAS ---
-async function initApp() {
-    if (currentCurrency !== 'USD') {
-        try {
-            const res = await fetch('https://open.er-api.com/v6/latest/USD');
-            const data = await res.json();
+            images: [
+                   "./img/chupon-1.jpg",
+                   "./img/chupon-2.png",
+                   "./img/chupon-3.png"
+            ] },
             
-            if (data && data.rates && data.rates[currentCurrency]) {
-                exchangeRate = data.rates[currentCurrency];
-            } else {
-                throw new Error("Falla en datos de API");
-            }
-        } catch (e) { 
-            // Si la API falla al cargar los detalles, usamos el respaldo
-            console.warn("Usando tasa manual en página de detalles");
-            exchangeRate = manualExchangeRates[currentCurrency] || 1; 
-        }
-    } else {
-        exchangeRate = 1;
-    }
-    renderDetail();
-}
+            { id: 2, category: 'audio', 
+            name: "Producto 2", 
+            priceUSD: 249.50, 
+            description: "Audio de alta fidelidad con cancelación activa de ruido líder en la industria. Sumérgete en tu música favorita sin distracciones externas. Cuentan con almohadillas de proteína de memoria para una comodidad extrema durante largas sesiones de uso y una batería que dura hasta 40 horas con una sola carga.", 
+            images: [
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
+            ] },
+            
+            { id: 3, category: 'camaras', 
+            name: "Producto 3", 
+            priceUSD: 899.00, 
+            description: "Perfecta para fotografía nocturna y video 4K. Sensor full frame de 24.2 MP que captura detalles impresionantes. Sistema de autoenfoque ultra rápido que detecta ojos humanos y de animales. Incluye un lente de kit 24-70mm versátil para cualquier situación.", 
+            images: [
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
+            ] },
+            
+            { id: 4, category: 'computacion', 
+            name: "Producto 4", 
+            priceUSD: 1250.00, 
+            description: "Pantalla OLED de 15.6 pulgadas con colores vibrantes y negros profundos. Potenciada por el último procesador de alto rendimiento y 32GB de RAM para tareas pesadas como edición de video, renderizado 3D y desarrollo de software complejo.", 
+            images: [
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
+            ] },
+            
+            { id: 5, category: 'relojes', 
+            name: "Producto 5", 
+            priceUSD: 199.99, 
+            description: "Oxígeno en sangre y 15 días de batería. Este reloj inteligente de última generación ofrece un seguimiento preciso de tu salud y actividades deportivas. Con su pantalla AMOLED de alta resolución, podrás ver tus notificaciones incluso bajo luz solar directa. Incluye más de 100 modos deportivos y es resistente al agua hasta 50 metros.", 
+            images: [
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
+            ] },
+            
+            { id: 6, category: 'audio', 
+            name: "Producto 6", 
+            priceUSD: 249.50, 
+            description: "Audio de alta fidelidad con cancelación activa de ruido líder en la industria. Sumérgete en tu música favorita sin distracciones externas. Cuentan con almohadillas de proteína de memoria para una comodidad extrema durante largas sesiones de uso y una batería que dura hasta 40 horas con una sola carga.", 
+            images: [
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
+            ] },
+            
+            { id: 7, category: 'camaras', 
+            name: "Producto 7", 
+            priceUSD: 899.00, 
+            description: "Perfecta para fotografía nocturna y video 4K. Sensor full frame de 24.2 MP que captura detalles impresionantes. Sistema de autoenfoque ultra rápido que detecta ojos humanos y de animales. Incluye un lente de kit 24-70mm versátil para cualquier situación.", 
+            images: [
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
+            ] },
+            
+            { id: 8, category: 'computacion', 
+            name: "Producto 8", 
+            priceUSD: 1250.00, 
+            description: "Pantalla OLED de 15.6 pulgadas con colores vibrantes y negros profundos. Potenciada por el último procesador de alto rendimiento y 32GB de RAM para tareas pesadas como edición de video, renderizado 3D y desarrollo de software complejo.", 
+            images: [
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
+            ] },
+            
+            { id: 9, category: 'camaras', 
+            name: "Producto 9", 
+            priceUSD: 899.00, 
+            description: "Perfecta para fotografía nocturna y video 4K. Sensor full frame de 24.2 MP que captura detalles impresionantes. Sistema de autoenfoque ultra rápido que detecta ojos humanos y de animales. Incluye un lente de kit 24-70mm versátil para cualquier situación.", 
+            images: [
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
+            ] },
+            
+            { id: 10, category: 'computacion', 
+            name: "Producto 10", 
+            priceUSD: 1250.00, 
+            description: "Pantalla OLED de 15.6 pulgadas con colores vibrantes y negros profundos. Potenciada por el último procesador de alto rendimiento y 32GB de RAM para tareas pesadas como edición de video, renderizado 3D y desarrollo de software complejo.", 
+            images: [
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+1",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+2",
+                   "https://placehold.co/800x800/ffc814/white?text=Imagen+3"
+            ] }
+        
+        ];
 
-function formatPrice(priceUSD) {
-    const converted = priceUSD * exchangeRate;
-    const locales = { 'USD': 'en-US', 'EUR': 'de-DE', 'VES': 'es-VE', 'PEN': 'es-PE' };
-    return new Intl.NumberFormat(locales[currentCurrency] || 'es-ES', { 
-        style: 'currency', 
-        currency: currentCurrency 
-    }).format(converted);
-}
+        // --- CONFIGURACIÓN DE TASAS MANUALES ---
+        const manualExchangeRates = {
+            'VES': 500.00, 
+            'EUR': 0.92,  
+            'PEN': 3.75   
+        };
+
+        // --- LÓGICA DE MONEDA Y ESTADO ---
+        const params = new URLSearchParams(window.location.search);
+        const productId = parseInt(params.get('id'));
+        const p = allProducts.find(item => item.id === productId);
+
+        let currentCurrency = localStorage.getItem('currency') || 'USD';
+        let exchangeRate = 1;
+        let currentSlide = 0;
+
+        // --- FUNCIONES DE MONEDA ACTUALIZADAS ---
+        async function initApp() {
+            if (currentCurrency !== 'USD') {
+                try {
+                    const res = await fetch('https://open.er-api.com/v6/latest/USD');
+                    const data = await res.json();
+                    
+                    if (data && data.rates && data.rates[currentCurrency]) {
+                        exchangeRate = data.rates[currentCurrency];
+                    } else {
+                        throw new Error("Falla en datos de API");
+                    }
+                } catch (e) { 
+                    console.warn("Usando tasa manual en página de detalles");
+                    exchangeRate = manualExchangeRates[currentCurrency] || 1; 
+                }
+            } else {
+                exchangeRate = 1;
+            }
+            renderDetail();
+        }
+
+        function formatPrice(priceUSD) {
+            const converted = priceUSD * exchangeRate;
+            const locales = { 'USD': 'en-US', 'EUR': 'de-DE', 'VES': 'es-VE', 'PEN': 'es-PE' };
+            return new Intl.NumberFormat(locales[currentCurrency] || 'es-ES', { 
+                style: 'currency', 
+                currency: currentCurrency 
+            }).format(converted);
+        }
+
         // --- RENDERIZADO ---
         function renderDetail() {
             if (!p) {
@@ -397,6 +439,16 @@ function formatPrice(priceUSD) {
                         <div style="margin-bottom:10px">🛡️ Garantía de 12 meses</div>
                         <div class="benefit-item">💳 Hasta 6 cuotas sin interés</div>
                         <button class="btn-add" onclick="handleAddToCart(${p.id})">Añadir al Carrito</button>
+                        
+                        <!-- NUEVO: Contenedor con los botones de compartir -->
+                        <div class="share-container">
+                            <button class="btn-share btn-whatsapp" onclick="shareOnWhatsApp()">
+                                <span>💬</span> Compartir WhatsApp
+                            </button>
+                            <button class="btn-share btn-copy" onclick="copyProductLink()">
+                                <span>🔗</span> Copiar Enlace
+                            </button>
+                        </div>
                     </div>
                 </div>
             `;
@@ -440,58 +492,68 @@ function formatPrice(priceUSD) {
             }, {passive: true});
         }
 
-	// animacion toast de añadir al carrito
+        // --- MANEJO DEL CARRITO Y ACCIONES ---
+        function handleAddToCart(id) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const product = allProducts.find(item => item.id === id);
+            const existing = cart.find(item => item.id === id);
+            
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({...product, quantity: 1});
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            showAddedAnimation(product.name, '🛒', '¡Añadido!');
+        }
 
-function handleAddToCart(id) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const product = allProducts.find(item => item.id === id);
-    const existing = cart.find(item => item.id === id);
-    
-    if (existing) {
-        existing.quantity++;
-    } else {
-        cart.push({...product, quantity: 1});
-    }
-    
-    localStorage.setItem('cart', JSON.stringify(cart));
+        // NUEVO: Función para compartir en WhatsApp
+        function shareOnWhatsApp() {
+            if (!p) return;
+            const currentUrl = window.location.href;
+            const text = encodeURIComponent(`¡Mira este producto en SmartStore!\n\n*${p.name}*\nPrecio: ${formatPrice(p.priceUSD)}\n\nVer más detalles aquí:\n${currentUrl}`);
+            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+        }
 
-    // CAMBIO: En lugar de alert, usamos la animación
-    showAddedAnimation(product.name);
-}
-		
-	// animacion toast de añadir al carrito
+        // NUEVO: Función para copiar enlace con la API Clipboard
+        function copyProductLink() {
+            const currentUrl = window.location.href;
+            navigator.clipboard.writeText(currentUrl).then(() => {
+                // Reutilizamos tu sistema de animación Toast cambiando los textos
+                showAddedAnimation('Enlace copiado al portapapeles', '🔗', '¡Copiado!');
+            }).catch(err => {
+                console.error('Error al copiar el enlace: ', err);
+            });
+        }
+        
+        // MODIFICADO: Ajustamos la animación para soportar dinámicamente diferentes íconos y títulos
+        function showAddedAnimation(textMsg, icon = '🛒', title = '¡Añadido!') {
+            let toast = document.getElementById('toast-msg');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'toast-msg';
+                toast.className = 'toast-notification';
+                document.body.appendChild(toast);
+            }
 
-		function showAddedAnimation(productName) {
-    // 1. Crear el elemento si no existe
-    let toast = document.getElementById('toast-msg');
-    if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'toast-msg';
-        toast.className = 'toast-notification';
-        document.body.appendChild(toast);
-    }
+            toast.innerHTML = `
+                <span class="toast-icon">${icon}</span>
+                <div>
+                    <div style="font-weight:bold">${title}</div>
+                    <div style="font-size:0.85rem">${textMsg}</div>
+                </div>
+            `;
 
-    // 2. Personalizar el mensaje
-    toast.innerHTML = `
-        <span class="toast-icon">🛒</span>
-        <div>
-            <div style="font-weight:bold">¡Añadido!</div>
-            <div style="font-size:0.85rem">${productName}</div>
-        </div>
-    `;
+            toast.classList.add('show');
 
-    // 3. Mostrar la animación
-    toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
 
-    // 4. Ocultar después de 3 segundos
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
-}
-
-    // Iniciar todo
+        // Iniciar todo
         initApp();
-
     </script>
 </body>
 </html>
